@@ -10,7 +10,7 @@ from http_client import get_async
 
 load_dotenv()
 
-BASE_URL = "http://gateway.marvel.com/v1/public/comics"
+BASE_URL = "http://gateway.marvel.com/"
 
 
 async def main() -> None:
@@ -25,8 +25,10 @@ async def main() -> None:
     md5.update(to_be_hashed.encode("utf-8"))
     md5_hex = md5.hexdigest()
 
+    endpoint = "v1/public/characters"
+
     response = await get_async(
-        f"{BASE_URL}?ts={timestamp}&apikey={public_api_key}&hash={md5_hex}"
+        f"{BASE_URL}{endpoint}?ts={timestamp}&apikey={public_api_key}&hash={md5_hex}"
     )
 
     print(response)
